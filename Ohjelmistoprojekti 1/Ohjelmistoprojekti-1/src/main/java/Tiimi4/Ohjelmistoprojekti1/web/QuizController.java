@@ -3,6 +3,7 @@ package Tiimi4.Ohjelmistoprojekti1.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -44,6 +45,12 @@ public class QuizController {
 		q1repo.save(quiz);
 		
 		return "redirect:kysely";
+	}
+	
+	@RequestMapping(value = "/delete1/{id}", method = RequestMethod.GET)
+	public String deleteGame(@PathVariable("id") Long quiz1Id, Model model) {
+		q1repo.deleteById(quiz1Id);
+		return "redirect:../kysely";
 	}
 
 }
