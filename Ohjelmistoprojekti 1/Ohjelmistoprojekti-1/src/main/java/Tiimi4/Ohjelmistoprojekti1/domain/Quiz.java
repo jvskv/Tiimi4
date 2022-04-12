@@ -11,6 +11,7 @@ public class Quiz {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	
 	private Long id;
+	private String num;
 	private String yhtye;
 	private String kappale;
 	private String elokuva;
@@ -21,8 +22,9 @@ public class Quiz {
 		super();
 	}
 
-	public Quiz(String yhtye, String kappale, String elokuva, String ruoka, String urheilulaji) {
+	public Quiz(String num, String yhtye, String kappale, String elokuva, String ruoka, String urheilulaji) {
 		super();
+		this.num = num;
 		this.yhtye = yhtye;
 		this.kappale = kappale;
 		this.elokuva = elokuva;
@@ -76,5 +78,13 @@ public class Quiz {
 
 	public void setUrheilulaji(String urheilulaji) {
 		this.urheilulaji = urheilulaji;
-	}	
+	}
+
+	public String getNum() {
+		return num;
+	}
+
+	public void setNum(String num) {
+		this.num = num;
+	}
 }

@@ -6,6 +6,63 @@
 </head>
 <body>
     <h1>Kyselyt</h1>
+    <div class="col-md-4">
+        <h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+    </div>
+    <div class="col-md-4" style="padding:20px 0">
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+        </form>
+    </div>
+    
     <a href="/quiz1" class="btn btn-primary">Quiz 1</a>
+    </br>
+    <a href="/quiz1" class="btn btn-primary">Quiz 1</a>
+    <div>
+	    <h1>Vastaukset</h1>
+	    <h2>Kysely 1:</h2>
+	    
+	    <table class="table table-striped">
+	        <tr>
+	        	<th>Vastaaja</th>
+	            <th>Mikä on paras yhtye?</th>
+	            <th>Mikä on paras musiikkikappale?</th>
+	            <th>Mikä on paras elokuva?</th>
+	            <th>Mikä on paras ruoka?</th>
+	            <th>Mikä on paras urheilulaji?</th>
+	        </tr>  
+	        <tr th:each = "quiz : ${quizes}">
+	        	<td th:text="${quiz.num}"></td>
+	            <td th:text="${quiz.yhtye}"></td>
+	            <td th:text="${quiz.kappale}"></td>
+	            <td th:text="${quiz.elokuva}"></td>
+	            <td th:text="${quiz.ruoka}"></td>
+	            <td th:text="${quiz.urheilulaji}"></td>
+	            <td><a th:href="@{/delete1/{id}(id=${quiz.id})}">Delete</a><td>
+	        </tr>
+	     </table>
+	     
+	     <h2>Kysely 2:</h2>
+	    
+	    <table class="table table-striped">
+	        <tr>
+	        	<th>Vastaaja</th>
+	            <th>Mikä on paras yhtye?</th>
+	            <th>Mikä on paras musiikkikappale?</th>
+	            <th>Mikä on paras elokuva?</th>
+	            <th>Mikä on paras ruoka?</th>
+	            <th>Mikä on paras urheilulaji?</th>
+	        </tr>  
+	        <tr th:each = "quiz : ${quizes}">
+	        	<td th:text="${quiz.num}"></td>
+	            <td th:text="${quiz.yhtye}"></td>
+	            <td th:text="${quiz.kappale}"></td>
+	            <td th:text="${quiz.elokuva}"></td>
+	            <td th:text="${quiz.ruoka}"></td>
+	            <td th:text="${quiz.urheilulaji}"></td>
+	            <td><a th:href="@{/delete1/{id}(id=${quiz.id})}">Delete</a><td>
+	        </tr>
+	     </table>
+    </div>
 </body>
 </html>
