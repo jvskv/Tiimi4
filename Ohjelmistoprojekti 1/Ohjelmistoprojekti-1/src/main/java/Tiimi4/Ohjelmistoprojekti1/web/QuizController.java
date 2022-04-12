@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import Tiimi4.Ohjelmistoprojekti1.domain.Quiz;
 import Tiimi4.Ohjelmistoprojekti1.domain.QuizRepository;
+import Tiimi4.Ohjelmistoprojekti1.domain.QuizTwo;
+import Tiimi4.Ohjelmistoprojekti1.domain.QuizTwoRepository;
 
 
 @Controller
@@ -15,10 +17,13 @@ public class QuizController {
 	
 	@Autowired
 	private QuizRepository q1repo;
+	@Autowired
+	private QuizTwoRepository q2repo;
 
 	@RequestMapping(value = { "/", "/kysely" })
 	public String gameList(Model model) {
 		model.addAttribute("quizes", q1repo.findAll());
+		model.addAttribute("quizes", q2repo.findAll());
 		return "kysely";
 	}
 	
@@ -27,10 +32,17 @@ public class QuizController {
 		model.addAttribute("quiz", new Quiz());
 		return "quiz1";
 	}
+	
+	@RequestMapping(value = "/quiz2")
+	public String addGame2(Model model) {
+		model.addAttribute("quiz2", new QuizTwo());
+		return "quiz2";
+	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String save(Quiz quiz) {
 		q1repo.save(quiz);
+		
 		return "redirect:kysely";
 	}
 
