@@ -1,5 +1,7 @@
 package Tiimi4.Ohjelmistoprojekti1.domain;
 
-public interface QuizRepository {
+import org.springframework.data.repository.CrudRepository;
+
+public interface QuizRepository extends CrudRepository<Quiz, Long> {
 
 }
