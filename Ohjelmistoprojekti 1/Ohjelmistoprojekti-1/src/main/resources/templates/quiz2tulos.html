@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Kysely</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+	<h2>Kysely 2:</h2>
+	<div>
+		<h1>Vastaukset</h1>
+	    <h2>Kysely 2:</h2>
+	    
+	    <table class="table table-striped">
+	        <tr>
+	        	<th>1) Mikä seuraavista on paras ohjelmointikieli:</th>
+	            <th>2) Mikä seuraavista on paras koodieditori:</th>
+	        </tr>  
+	        <tr th:each = "quiztwo : ${quizestwo}">
+	        	<td th:text="${quiztwo.koodieditori}"></td>
+	            <td th:text="${quiztwo.ohjelmointikieli}"></td>
+	        </tr>
+	     </table>
+	    <div>
+    		<a href="/kysely" class="btn btn-primary">Takaisin Pääsivulle</a>
+    	</div>
+	 </div>
+</body>
+</html>

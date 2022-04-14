@@ -18,39 +18,58 @@ public class QuizController {
 	
 	@Autowired
 	private QuizRepository q1repo;
+	
 	@Autowired
 	private QuizTwoRepository q2repo;
 
 	@RequestMapping(value = { "/", "/kysely" })
-	public String gameList(Model model) {
+	public String kysely(Model model) {
 		model.addAttribute("quizes", q1repo.findAll());
 		model.addAttribute("quizes", q2repo.findAll());
 		return "kysely";
 	}
 	
 	@RequestMapping(value = "/quiz1")
-	public String addGame(Model model) {
+	public String addQuiz(Model model) {
 		model.addAttribute("quiz", new Quiz());
 		return "quiz1";
 	}
 	
+	@RequestMapping(value = { "/quiz1tulos" })
+	public String quiz1List(Model model) {
+		model.addAttribute("quizes", q1repo.findAll());
+		return "quiz1tulos";
+	}
+	
 	@RequestMapping(value = "/quiz2")
-	public String addGame2(Model model) {
+	public String addQuiz2(Model model) {
 		model.addAttribute("quiz2", new QuizTwo());
 		return "quiz2";
+	}
+	
+	@RequestMapping(value = { "/quiz2tulos" })
+	public String quiz2List(Model model) {
+		model.addAttribute("quizestwo", q2repo.findAll());
+		return "quiz2tulos";
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String save(Quiz quiz) {
 		q1repo.save(quiz);
-		
-		return "redirect:kysely";
+		return "redirect:quiz1tulos";
+	}
+	
+	@RequestMapping(value = "/save2", method = RequestMethod.POST)
+	public String save(QuizTwo quiztwo) {
+		System.out.println("controller " + quiztwo);
+		q2repo.save(quiztwo);
+		return "redirect:quiz2tulos";
 	}
 	
 	@RequestMapping(value = "/delete1/{id}", method = RequestMethod.GET)
 	public String deleteGame(@PathVariable("id") Long quiz1Id, Model model) {
 		q1repo.deleteById(quiz1Id);
-		return "redirect:../kysely";
+		return "redirect:../quiz1tulos";
 	}
 
 }

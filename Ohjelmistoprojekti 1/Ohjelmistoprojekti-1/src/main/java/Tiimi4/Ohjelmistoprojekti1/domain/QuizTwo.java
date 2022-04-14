@@ -18,7 +18,6 @@ public class QuizTwo {
 		super();
 	}
 
-
 	public QuizTwo(String koodieditori, String ohjelmointikieli) {
 		super();
 		this.koodieditori = koodieditori;
