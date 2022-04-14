@@ -19,6 +19,7 @@
 	        <tr th:each = "quiztwo : ${quizestwo}">
 	        	<td th:text="${quiztwo.koodieditori}"></td>
 	            <td th:text="${quiztwo.ohjelmointikieli}"></td>
+	            <td><a th:href="@{/delete2/{id}(id=${quiztwo.id})}">Delete</a><td>
 	        </tr>
 	     </table>
 	    <div>

@@ -67,9 +67,15 @@ public class QuizController {
 	}
 	
 	@RequestMapping(value = "/delete1/{id}", method = RequestMethod.GET)
-	public String deleteGame(@PathVariable("id") Long quiz1Id, Model model) {
+	public String deleteQuiz1(@PathVariable("id") Long quiz1Id, Model model) {
 		q1repo.deleteById(quiz1Id);
 		return "redirect:../quiz1tulos";
+	}
+	
+	@RequestMapping(value = "/delete2/{id}", method = RequestMethod.GET)
+	public String deleteQuiz2(@PathVariable("id") Long quiz2Id, Model model) {
+		q2repo.deleteById(quiz2Id);
+		return "redirect:../quiz2tulos";
 	}
 
 }
