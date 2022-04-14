@@ -3,13 +3,12 @@
 <head>
     <title>Kysely</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 </head>
 
 <body>
     <h1>Kysely 1 Tulokset</h1>    
     <div>
-	    <h1>Vastaukset</h1>
-	    <h2>Kysely 1:</h2>
 	    
 	    <table class="table table-striped">
 	        <tr>
@@ -27,7 +26,7 @@
 	            <td th:text="${quiz.elokuva}"></td>
 	            <td th:text="${quiz.ruoka}"></td>
 	            <td th:text="${quiz.urheilulaji}"></td>
-	            <td><a th:href="@{/delete1/{id}(id=${quiz.id})}">Delete</a><td>
+	            <td><a th:href="@{/delete1/{id}(id=${quiz.id})}" class="btn btn-danger">Delete</a><td>
 	        </tr>
 	     </table>
 	    <div>
