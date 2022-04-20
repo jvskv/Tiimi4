@@ -16,8 +16,8 @@
 	            <th>2) Mikä seuraavista on paras koodieditori:</th>
 	        </tr>  
 	        <tr th:each = "quiztwo : ${quizestwo}">
-	        	<td th:text="${quiztwo.koodieditori}"></td>
-	            <td th:text="${quiztwo.ohjelmointikieli}"></td>
+	        	<td th:text="${quiztwo.ohjelmointikieli}"></td>
+	            <td th:text="${quiztwo.koodieditori}"></td>
 	            <td><a th:href="@{/delete2/{id}(id=${quiztwo.id})}" class="btn btn-danger">Delete</a><td>
 	        </tr>
 	     </table>
