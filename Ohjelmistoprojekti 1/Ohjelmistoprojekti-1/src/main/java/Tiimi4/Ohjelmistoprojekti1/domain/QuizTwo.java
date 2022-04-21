@@ -28,10 +28,10 @@ public class QuizTwo {
 		return id;
 	}
 
-
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
 	public String getKoodieditori() {
 		return koodieditori;
 	}
