@@ -49,7 +49,7 @@ public class QuizTwo {
 	}
 	@Override
 	public String toString() {
-		return "QuizTwo [koodieditori=" + koodieditori + ", ohjelmointikieli=" + ohjelmointikieli + "]";
+		return "QuizTwo [koodieditori=" + koodieditori + " ohjelmointikieli=" + ohjelmointikieli + "]";
 	}
 
 }
