@@ -33,8 +33,7 @@ function Kysely2() {
           component="form"
           sx={{ "& .MuiTextField-root": { m: 1, width: "25ch" } }}
         >  
-        <Typography sx={{marginLeft: 1}}>1) Mikä seuraavista on paras ohjelmointikieli:</Typography>
-        <div className="language1">
+        <Typography sx={{marginTop: 1}}>1) Mikä seuraavista on paras ohjelmointikieli:</Typography>
         <input
           type="checkbox"
           id="ohjelmointikieli"
@@ -73,10 +72,9 @@ function Kysely2() {
           name="ohjelmointikieli"
           value="Else"
         />
-        Jokin muu, mikÃ¤?
+        Jokin muu, mikä?
         <textarea id="ohjelmointikieli" name="ohjelmointikieli"></textarea>
-        </div>
-        <Typography sx={{marginLeft: 1}}>2) Mikä seuraavista on paras koodieditori:</Typography>
+        <Typography sx={{ marginTop: 2}}>2) Mikä seuraavista on paras koodieditori:</Typography>
         <input
           type="checkbox"
           id="koodieditori"
