@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import Tiimi4.Ohjelmistoprojekti1.domain.NewQuiz;
+import Tiimi4.Ohjelmistoprojekti1.domain.NewQuizRepository;
 import Tiimi4.Ohjelmistoprojekti1.domain.Quiz;
 import Tiimi4.Ohjelmistoprojekti1.domain.QuizRepository;
 import Tiimi4.Ohjelmistoprojekti1.domain.QuizTwo;
@@ -21,12 +23,27 @@ public class QuizController {
 	
 	@Autowired
 	private QuizTwoRepository q2repo;
+	
+	@Autowired
+	private NewQuizRepository newqrepo;
 
 	@RequestMapping(value = { "/", "/kysely" })
 	public String kysely(Model model) {
 		model.addAttribute("quizes", q1repo.findAll());
 		model.addAttribute("quizes", q2repo.findAll());
 		return "kysely";
+	}
+	
+	@RequestMapping(value = "/uusi_kysely")
+	public String newQuiz(Model model) {
+		model.addAttribute("quiz", new Quiz());
+		return "uusi_kysely";
+	}
+	
+	@RequestMapping(value = "/quizsave", method = RequestMethod.POST)
+	public String save(NewQuiz newquiz) {
+		newqrepo.save(newquiz);
+		return "redirect:uusi_kysely";
 	}
 	
 	@RequestMapping(value = "/quiz1")
