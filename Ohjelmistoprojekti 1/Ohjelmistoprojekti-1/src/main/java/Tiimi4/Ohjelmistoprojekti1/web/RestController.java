@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -48,4 +49,16 @@ public class RestController {
 	public @ResponseBody Optional<QuizTwo> findQuizRest2(@PathVariable("id") Long quiz2Id) {
 			return q2repo.findById(quiz2Id);
 		}
+	
+	@RequestMapping(value = "/tallenna", method = RequestMethod.POST)
+	public String save(Quiz quiz) {
+		q1repo.save(quiz);
+		return "redirect:vastaus1" ;
+		
+	}
+	@RequestMapping(value = "/tallenna2", method = RequestMethod.POST)
+	public String save(QuizTwo quiztwo) {
+		q2repo.save(quiztwo);
+		return "redirect:vastaus2" ;
+	}
 }
