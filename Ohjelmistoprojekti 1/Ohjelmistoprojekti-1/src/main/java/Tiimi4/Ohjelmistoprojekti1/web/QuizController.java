@@ -34,16 +34,17 @@ public class QuizController {
 		return "kysely";
 	}
 	
-	@RequestMapping(value = "/uusi_kysely")
+	@RequestMapping(value = "/newquiz")
 	public String newQuiz(Model model) {
-		model.addAttribute("quiz", new Quiz());
-		return "uusi_kysely";
+		model.addAttribute("newquiz", new NewQuiz());
+		model.addAttribute("newquizes", newqrepo.findAll());
+		return "newquiz";
 	}
 	
 	@RequestMapping(value = "/quizsave", method = RequestMethod.POST)
 	public String save(NewQuiz newquiz) {
 		newqrepo.save(newquiz);
-		return "redirect:uusi_kysely";
+		return "redirect:newquiz";
 	}
 	
 	@RequestMapping(value = "/quiz1")
