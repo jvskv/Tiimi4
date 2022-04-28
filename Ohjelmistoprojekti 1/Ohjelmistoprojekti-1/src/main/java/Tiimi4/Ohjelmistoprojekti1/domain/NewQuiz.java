@@ -11,26 +11,17 @@ public class NewQuiz {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	
 	private Long id;
-	private String kysymys;
-	private String tyyppi;
-	private String vaihtoehto1;
-	private String vaihtoehto2;
-	private String vaihtoehto3;
-	private String vaihtoehto4;
+	private String title;
+	private String desc;
 	
 	public NewQuiz() {
 		super();
 	}
 
-	public NewQuiz(String kysymys, String tyyppi, String vaihtoehto1, String vaihtoehto2, String vaihtoehto3,
-			String vaihtoehto4) {
+	public NewQuiz(String title, String desc) {
 		super();
-		this.kysymys = kysymys;
-		this.tyyppi = tyyppi;
-		this.vaihtoehto1 = vaihtoehto1;
-		this.vaihtoehto2 = vaihtoehto2;
-		this.vaihtoehto3 = vaihtoehto3;
-		this.vaihtoehto4 = vaihtoehto4;
+		this.title = title;
+		this.desc = desc;
 	}
 
 	public Long getId() {
@@ -41,51 +32,19 @@ public class NewQuiz {
 		this.id = id;
 	}
 
-	public String getKysymys() {
-		return kysymys;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setKysymys(String kysymys) {
-		this.kysymys = kysymys;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public String getTyyppi() {
-		return tyyppi;
+	public String getDesc() {
+		return desc;
 	}
 
-	public void setTyyppi(String tyyppi) {
-		this.tyyppi = tyyppi;
-	}
-
-	public String getVaihtoehto1() {
-		return vaihtoehto1;
-	}
-
-	public void setVaihtoehto1(String vaihtoehto1) {
-		this.vaihtoehto1 = vaihtoehto1;
-	}
-
-	public String getVaihtoehto2() {
-		return vaihtoehto2;
-	}
-
-	public void setVaihtoehto2(String vaihtoehto2) {
-		this.vaihtoehto2 = vaihtoehto2;
-	}
-
-	public String getVaihtoehto3() {
-		return vaihtoehto3;
-	}
-
-	public void setVaihtoehto3(String vaihtoehto3) {
-		this.vaihtoehto3 = vaihtoehto3;
-	}
-
-	public String getVaihtoehto4() {
-		return vaihtoehto4;
-	}
-
-	public void setVaihtoehto4(String vaihtoehto4) {
-		this.vaihtoehto4 = vaihtoehto4;
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
 }

@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import Tiimi4.Ohjelmistoprojekti1.domain.NewQuestion;
+import Tiimi4.Ohjelmistoprojekti1.domain.NewQuestionRepository;
 import Tiimi4.Ohjelmistoprojekti1.domain.NewQuiz;
 import Tiimi4.Ohjelmistoprojekti1.domain.NewQuizRepository;
 import Tiimi4.Ohjelmistoprojekti1.domain.Quiz;
@@ -26,6 +28,9 @@ public class QuizController {
 	
 	@Autowired
 	private NewQuizRepository newqrepo;
+	
+	@Autowired
+	private NewQuestionRepository newquestionrepo;
 
 	@RequestMapping(value = { "/", "/kysely" })
 	public String kysely(Model model) {
@@ -36,7 +41,6 @@ public class QuizController {
 	
 	@RequestMapping(value = "/newquiz")
 	public String newQuiz(Model model) {
-		model.addAttribute("newquiz", new NewQuiz());
 		model.addAttribute("newquizes", newqrepo.findAll());
 		return "newquiz";
 	}
@@ -44,6 +48,18 @@ public class QuizController {
 	@RequestMapping(value = "/quizsave", method = RequestMethod.POST)
 	public String save(NewQuiz newquiz) {
 		newqrepo.save(newquiz);
+		return "redirect:newquiz";
+	}
+	
+	@RequestMapping(value = "/newquestion")
+	public String newQuestion(Model model) {
+		model.addAttribute("newquestions", newquestionrepo.findAll());
+		return "newquestion";
+	}
+	
+	@RequestMapping(value = "/questionsave", method = RequestMethod.POST)
+	public String save(NewQuestion newquestion) {
+		newquestionrepo.save(newquestion);
 		return "redirect:newquiz";
 	}
 	
