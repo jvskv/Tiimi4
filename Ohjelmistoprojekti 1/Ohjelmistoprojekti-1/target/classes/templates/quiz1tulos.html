@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Kysely</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+
+<body>
+    <h1>Kysely 1 Tulokset</h1>    
+    <div>
+	    
+	    <table class="table table-striped">
+	        <tr>
+	        	<th>Vastaaja</th>
+	            <th>Mikä on paras yhtye?</th>
+	            <th>Mikä on paras musiikkikappale?</th>
+	            <th>Mikä on paras elokuva?</th>
+	            <th>Mikä on paras ruoka?</th>
+	            <th>Mikä on paras urheilulaji?</th>
+	        </tr>  
+	        <tr th:each = "quiz : ${quizes}">
+	        	<td th:text="${quiz.num}"></td>
+	            <td th:text="${quiz.yhtye}"></td>
+	            <td th:text="${quiz.kappale}"></td>
+	            <td th:text="${quiz.elokuva}"></td>
+	            <td th:text="${quiz.ruoka}"></td>
+	            <td th:text="${quiz.urheilulaji}"></td>
+	            <td><a th:href="@{/delete1/{id}(id=${quiz.id})}" class="btn btn-danger">Delete</a><td>
+	        </tr>
+	     </table>
+	    <div>
+    		<a href="/kysely" class="btn btn-primary">Takaisin Pääsivulle</a>
+    	</div>
+	 </div>
+</body>
+</html>
