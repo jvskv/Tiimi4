@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Kysely</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1>Tämä kysely selvittää ohjelmistoalan suosituimmat työkalut</h1>
+    <div>
+        <form th:object="${quiztwo}" th:action="@{save2}" action="#" method="post">
+        
+ 
+ <p>Mikä seuraavista on paras ohjelmointikieli?</p>
+       
+<input type="radio" id="ohjelmointikieli" name="ohjelmointikieli" value="Java"/>
+<label for="java">Java</label><br>
+
+<input type="radio" id="ohjelmointikieli" name="ohjelmointikieli" value="Python"/>
+<label for="python">Python</label><br>
+
+<input type="radio" id="ohjelmointikieli" name="ohjelmointikieli" value="JavaScript"/>
+<label for="javascript">JavaScript</label><br>
+
+<input type="radio" id="ohjelmointikieli" name="ohjelmointikieli" value="C#"/>
+<label for="C#">C#</label><br>
+
+<label for="else">
+<input type="radio" id="ohjelmointikieli" />
+Jokin muu, mikä?: <input type="text" name="ohjelmointikieli"/>
+</label>
+
+
+
+<p>Mikä seuraavista on paras koodieditori?</p>
+
+<input type="radio" id="koodieditori" name="koodieditori" value="Eclipse">
+<label for="eclipse">Eclipse</label><br>
+
+<input type="radio" id="koodieditori" name="koodieditori" value="VSCode">
+<label for="vscode">Visual Studio Code</label><br>
+
+<input type="radio" id="koodieditori" name="koodieditori" value="NotePad">
+<label for="NotePad">NotePad ++</label><br>
+
+<label for="else">
+<input type="radio" id="koodieditori" />
+Jokin muu, mikä?: <input type="text" name="koodieditori" /><br>
+</label>
+
+                  
+            <input type="submit" value="Save"></input>
+            
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Kysely</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+
+<body>
+    <h1>Kyselyt</h1>
+    <div class="col-md-4">
+        <h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+    </div>
+    <div class="col-md-4" style="padding:20px 0">
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+        </form>
+    </div>
+    
+    <div>
+    <label>Luo uusi kysely: </label>
+    <a href="/newquiz" class="btn btn-primary">Luo Kysely</a>
+	</div>
+	<br>
+	
+    <div>
+    <label>Kysely 1: </label>
+    <a href="/quiz1" class="btn btn-primary">Quiz 1</a>
+    <a href="/quiz1tulos" class="btn btn-primary">Quiz 1 Tulos</a>
+	</div>
+	<br>
+	
+    <div>
+    <label>Kysely 2: </label>
+    <a href="/quiz2" class="btn btn-primary">Quiz 2</a>
+    <a href="/quiz2tulos" class="btn btn-primary">Quiz 2 Tulos</a>
+    </div>
+    
+    
+</body>
+</html>
