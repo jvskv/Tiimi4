@@ -11,49 +11,51 @@ import org.springframework.web.bind.annotation.RestController;
 
 import Tiimi4.Ohjelmistoprojekti1.domain.Quiz;
 import Tiimi4.Ohjelmistoprojekti1.domain.QuizRepository;
+import Tiimi4.Ohjelmistoprojekti1.domain.QuizTwo;
+import Tiimi4.Ohjelmistoprojekti1.domain.QuizTwoRepository;
 
 
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
-public class QuizRestController {
+public class QuizTwoRestController {
 	
 		
-	  private QuizRepository q1repository;
+	  private QuizTwoRepository q2repository;
 	  	
 	
 
-	  QuizRestController(QuizRepository q1repository) {
-	    this.q1repository = q1repository;
+	  QuizTwoRestController(QuizTwoRepository q2repository) {
+	    this.q2repository = q2repository;
 
 	  }
 
 	
-	  @GetMapping("/quizes")
-	  Iterable<Quiz> all() {
-	    return  q1repository.findAll();
+	  @GetMapping("/quizes2")
+	  Iterable<QuizTwo> all() {
+	    return  q2repository.findAll();
 	  
 	  }
 	 
 
-	  @PostMapping("/quizes")
+	  @PostMapping("/quizes2")
 	  Quiz newQuiz(@RequestBody Quiz newQuiz) {
-	    return q1repository.save(newQuiz);
+	    return q2repository.save(newQuiz);
 	   
 	  }
 
 
-	  @PutMapping("/quizes/{id}")
-	  Quiz replaceQuiz(@RequestBody Quiz newQuiz, @PathVariable Long id) {
+	  @PutMapping("/quizes2/{id}")
+	  Quiz replaceQuizTwo(@RequestBody Quiz newQuiz, @PathVariable Long id) {
 	    
 
 	        newQuiz.setId(id);
-	        return q1repository.save(newQuiz);
+	        return q2repository.save(newQuiz);
 	     
 	  }
 
-	  @DeleteMapping("/quizes/{id}")
-	  void deleteQuiz(@PathVariable Long id) {
-	    q1repository.deleteById(id);
+	  @DeleteMapping("/quizes2/{id}")
+	  void deleteQuizTwo(@PathVariable Long id) {
+	    q2repository.deleteById(id);
 	  }
 	}
