@@ -9,6 +9,9 @@ import { grey } from "@mui/material/colors";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Etusivu from "./components/Etusivu";
 import Kysely1 from "./components/Kysely1";
+import Kysely2 from "./components/Kysely2";
+import Tulokset from "./components/HaeTulokset1";
+import Tulokset2 from "./components/Tulokset2";
 
 const theme = createTheme({
   palette: {
@@ -29,6 +32,9 @@ ReactDOM.render(
         <Routes>
           <Route path="/" element={ <Etusivu />} />
           <Route path="/kysely1" element={ <Kysely1 /> } />
+          <Route path="/kysely2" element={ <Kysely2 /> } />
+          <Route path="/tulokset" element={ <Tulokset /> } />
+          <Route path="/tulokset2" element={ <Tulokset2 /> } />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
