@@ -41,7 +41,9 @@ public class QuizController {
 	
 	@RequestMapping(value = "/newquiz")
 	public String newQuiz(Model model) {
-		model.addAttribute("newquizes", newqrepo.findAll());
+		// model.addAttribute("newquizes", newqrepo.findAll());
+		model.addAttribute("newquiz", new NewQuiz());
+		model.addAttribute("newquestions", newquestionrepo.findAll());
 		return "newquiz";
 	}
 	
@@ -49,6 +51,12 @@ public class QuizController {
 	public String save(NewQuiz newquiz) {
 		newqrepo.save(newquiz);
 		return "redirect:newquiz";
+	}
+	
+	@RequestMapping(value = { "/newquiztulos" })
+	public String newQuizList(Model model) {
+		model.addAttribute("newquizes", newqrepo.findAll());
+		return "newquiztulos";
 	}
 	
 	@RequestMapping(value = "/newquestion")
