@@ -27,6 +27,22 @@ function Etusivu() {
           Linkki toiseen kyselyyn
         </Typography>
       </Link>
+      <Typography component="h1" variant="h2" align="left" gutterBottom>
+        Kysely 1 tulokset
+      </Typography>
+      <Link component={RouterLink} to="/tulokset">
+        <Typography variant="h6" gutterBottom>
+          Linkki ensimmäisen kyselyn tuloksiin
+        </Typography>
+      </Link>
+      <Typography component="h1" variant="h2" align="left" gutterBottom>
+        Kysely 2 tulokset
+      </Typography>
+      <Link component={RouterLink} to="/tulokset2">
+        <Typography variant="h6" gutterBottom>
+          Linkki toisen kyselyn tuloksiin
+        </Typography>
+      </Link>
     </Box>
   );
 }

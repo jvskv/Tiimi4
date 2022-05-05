@@ -5,10 +5,13 @@ import { Paper } from "@mui/material";
 import { Button } from "@mui/material";
 import CreateIcon from "@mui/icons-material/Create";
 import { Typography } from "@mui/material";
-import axios from "axios";
+
 
 function Kysely1() {
+  const [viesti, setViesti] = useState("");
+
   const [kysely, setValues] = useState({
+    numero: "",
     yhtye: "",
     kappale: "",
     elokuva: "",
@@ -16,33 +19,60 @@ function Kysely1() {
     urheilulaji: "",
   });
 
-  const [viesti, setViesti] = useState("");
-
-  const kysely1 = async (e) => {
-    const formData = {
+  const kysely1 = (e) => {
+    setValues({
+      numero: kysely.numero,
       yhtye: kysely.yhtye,
       kappale: kysely.kappale,
       elokuva: kysely.elokuva,
       ruoka: kysely.ruoka,
-      urheilulaji: kysely.urheilulaji,
+      urheilulaji: kysely.urheilulaji
+    })
+    vastaus(kysely)
+    setViesti("Kiitos vastauksista!")
+    console.log(kysely)
     };
-
+/* 
+  let handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      await axios.post("http://localhost:8080/quiz/add", formData);
+      let res = await fetch("https://localhost:8080/quizes", {
+        method: "POST",
+        body: JSON.stringify({kysely})
+      })
+    let resJson = await res.json();
+    if (res.status === 200)  {
       setValues({
-        yhtye: "",
-        kappale: "",
-        elokuva: "",
-        ruoka: "",
-        urheilulaji: "",
-      });
-      setViesti("Kiitos vastauksista");
-    } catch (error) {
-      setValues([]);
-      setViesti("Virhe" + error);
+        numero: kysely.numero,
+        yhtye: kysely.yhtye,
+        kappale: kysely.kappale,
+        elokuva: kysely.elokuva,
+        ruoka: kysely.ruoka,
+        urheilulaji: kysely.urheilulaji
+      })
+      setViesti("Tallennettu onnistuneesti")
+    } else {
+      setViesti("Virhe")
     }
+    } catch (err) {
+      console.log(err)
+    }
+  } */
 
-    setViesti("Kiitos vastauksista!");
+  const vastaus = (kysely) => {
+    fetch("https://localhost:8080/quizes", {
+      method: "POST",
+      headers: { "Content-type": "application.json" },
+      body: JSON.stringify(kysely),
+    })
+      .then(response => {
+        if (response.ok) {
+          alert("Tallennettu");
+        } else {
+          alert("Virhe");
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   const muuta = (e) => {
@@ -50,8 +80,6 @@ function Kysely1() {
       ...kysely,
       [e.target.name]: e.target.value,
     });
-
-    setViesti("");
   };
 
   /*   const tyhjenna = (e) => {
@@ -72,6 +100,15 @@ function Kysely1() {
         component="form"
         sx={{ "& .MuiTextField-root": { m: 1, width: "25ch" } }}
       >
+        <Typography sx={{ marginLeft: 1 }}>Kyselijä numerosi?</Typography>
+        <TextField
+          required
+          fullWidth
+          label="Numero"
+          name="numero"
+          value={kysely.numero}
+          onChange={(e) => muuta(e)}
+        />
         <Typography sx={{ marginLeft: 1 }}>Mikä on paras yhtye?</Typography>
         <TextField
           required
