@@ -4,4 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface QuizTwoRepository extends CrudRepository<QuizTwo, Long> {
 
+	Quiz save(Quiz newQuiz);
+
 }
