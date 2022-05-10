@@ -1,127 +1,170 @@
-import React, { useState } from 'react';
-import { Box } from "@mui/material";
-import { Paper } from "@mui/material";
-import { Button } from "@mui/material";
+import React, { useState, useEffect } from "react";
 import CreateIcon from "@mui/icons-material/Create";
-import { Typography } from "@mui/material";
+import { Button } from "@mui/material";
 
-function Kysely2() {
+function Kysely2 () {
 
-  const [setValues] = useState({
-        kysymys1: "",
-        kysymys2: "",
-    });
-    
-  const [viesti, setViesti] = useState("");
-    
-  const Quiz2 = (e) => {
-    setValues({
-          kysymys1: "",
-          kysymys2: "",
- 
-  });
-    
-  setViesti("Kiitos vastauksista!");
-      };
-    
+    const [checked, setChecked] = useState(false)
+    const [textfield, setTextfield] = useState(false);
+    const [textfield1, setTextfield1] = useState(false);
+    const [value, setValue] = React.useState({
+        ohjelmointikieli: '',
+        koodieditori: ''
+    })
 
-  return (
-    <Box>
-      <Paper sx={{ padding: "10px", margin: "10px" }}>
-        <Box
-          component="form"
-          sx={{ "& .MuiTextField-root": { m: 1, width: "25ch" } }}
-        >  
-        <Typography sx={{marginTop: 1}}>1) Mikä seuraavista on paras ohjelmointikieli:</Typography>
-        <input
-          type="checkbox"
-          id="ohjelmointikieli"
-          name="ohjelmointikieli"
-          value="Java"
-        />
-        Java
-        <br></br>
-        <input
-          type="checkbox"
-          id="ohjelmointikieli"
-          name="ohjelmointikieli"
-          value="Python"
-        />
-        Python
-        <br></br>
-        <input
-          type="checkbox"
-          id="ohjelmointikieli"
-          name="ohjelmointikieli"
-          value="JavaScript"
-        />
-        JavaScript
-        <br></br>
-        <input
-          type="checkbox"
-          id="ohjelmointikieli"
-          name="ohjelmointikieli"
-          value="C#"
-        />
-        C#
-        <br></br>
-        <input
-          type="checkbox"
-          id="ohjelmointikieli"
-          name="ohjelmointikieli"
-          value="Else"
-        />
-        Jokin muu, mikä?
-        <textarea id="ohjelmointikieli" name="ohjelmointikieli"></textarea>
-        <Typography sx={{ marginTop: 2}}>2) Mikä seuraavista on paras koodieditori:</Typography>
-        <input
-          type="checkbox"
-          id="koodieditori"
-          name="koodieditori"
-          value="Eclipse"
-        />
-        Eclipse
-        <br></br>
-        <input
-          type="checkbox"
-          id="koodieditori"
-          name="koodieditori"
-          value="Visual Studio Code"
-        />
-        Visual Studio Code
-        <br></br>
-        <input
-          type="checkbox"
-          id="koodieditori"
-          name="koodieditori"
-          value="NotePad++"
-        />
-        Notepad++
-        <br></br>
-        <input
-          type="checkbox"
-          id="koodieditori"
-          name="koodieditori"
-          value="Else"
-        />
-        Jokin muu, mikä?
-        <textarea id="koodieditori" name="koodieditori"></textarea>
-        </Box>
-        <Box sx={{ textAlign: "center" }}>
-          <Button
-            onClick={(e) => Quiz2(e)}
-            variant="contained"
-            sx={{ marginRight: 3 }}
-            startIcon={<CreateIcon />}
-          >
-            Lisää
-          </Button>
-        </Box>
-        <Typography sx={{ marginTop: 3 }}>{viesti}</Typography>
-      </Paper>
-    </Box>
-  );
+    const handleChange = (event) => {
+            setValue({...value, [event.target.name]: event.target.value})  
+    };
+
+    const handleSubmit = (event) => {
+        setValue({
+            ohjelmointikieli: '',
+            koodieditori: ''
+        })
+        console.log(value)
+        addAnswer(value)
+    };
+
+    const addAnswer = (value) => {
+        fetch("https://localhost:8080/vastaus2",{
+          method:'POST',
+          headers: {'Content-type':'application/json'},
+          body: JSON.stringify(value)
+        })
+        .then(response => {
+          if (response.ok) {
+            alert('Saved!')
+          }
+          else {
+            alert('Something went wrong')
+          }
+        })
+        .catch(err => console.log(err))
+      }
+
+    return (
+        <div className="checks">
+            <form>
+                <p>1. Mikä seuraavista on paras ohjelmointikieli:</p>
+                <input
+                    type="checkbox"
+                    id="ohjelmointikieli"
+                    name="ohjelmointikieli"
+                    value="Java"
+                    onChange={handleChange}
+                    checked={checked}
+                    onChange={(e) => setChecked(e.target.checked)}
+                />
+                <label htmlFor="ohjelmointikieli">Java</label>
+                <br />
+                <input
+                    type="checkbox"
+                    id="ohjelmointikieli"
+                    name="ohjelmointikieli"
+                    value="Python"
+                    onChange={handleChange}
+                />
+                <label htmlFor="ohjelmointikieli">Python</label>
+                <br />
+                <input
+                    type="checkbox"
+                    id="ohjelmointikieli"
+                    name="ohjelmointikieli"
+                    value="JavaScript"
+                    onChange={handleChange}
+                />
+                <label htmlFor="ohjelmointikieli">JavaScipt</label>
+                <br />
+                <input
+                    type="checkbox"
+                    id="ohjelmointikieli"
+                    name="ohjelmointikieli"
+                    value="C#"
+                    onChange={handleChange}
+                />
+                <label htmlFor="ohjelmointikieli">C#</label>
+                <br />
+                <input
+                    type="checkbox"
+                    id="ohjelmointikieli"
+                    name="ohjelmointikieli"
+                    value="Else"
+                    onChange={() => {
+                    setTextfield(!textfield)
+                      }
+                    }
+                    textfield={textfield}
+                />
+                <label>
+                    Jokin muu, mikä:
+                    <input
+                    name="ohjelmointikieli"
+                    type="text"
+                    disabled={!textfield}
+                    onChange={handleChange}
+                    />
+                </label>
+                <br />
+                <br />
+                <p>2. Mikä seuraavista on paras koodieditori:</p>
+                <input
+                    type="checkbox"
+                    id="koodieditori"
+                    name="koodieditori"
+                    value="Eclipse"
+                    onChange={handleChange}
+                />
+                <label htmlFor="koodieditori">Eclipse</label>
+                <br />
+                <input
+                    type="checkbox"
+                    id="koodieditori"
+                    name="koodieditori"
+                    value="Visual Studio Code"
+                    onChange={handleChange}
+                />
+                <label htmlFor="koodieditori">Visual Studio Code</label>
+                <br />
+                <input
+                    type="checkbox"
+                    id="koodieditori"
+                    name="koodieditori"
+                    value="Notepad++"
+                    onChange={handleChange}
+                />
+                <label htmlFor="koodieditori">Notepad++</label>
+                <br />
+                <input
+                    type="checkbox"
+                    id="koodieditori"
+                    name="koodieditori"
+                    value="Else"
+                    onChange={() => {
+                    setTextfield1(!textfield1)
+                      }
+                    }
+                    textfield1={textfield1}
+                />
+                <label>
+                    Jokin muu, mikä:
+                    <input
+                    name="koodieditori"
+                    type="text"
+                    disabled={!textfield1}
+                    onChange={handleChange}
+                    />
+                </label>
+                <br />
+                <Button 
+                    variant="contained" 
+                    onClick={handleSubmit}
+                    startIcon={<CreateIcon />}
+                    >
+                    Lisää
+                </Button>
+            </form>
+        </div>
+    )
 }
-export default Kysely2;
 
-  
+export default Kysely2
