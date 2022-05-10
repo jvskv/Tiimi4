@@ -39,18 +39,18 @@ public class QuizTwoRestController {
 	 
 
 	  @PostMapping("/quizes2")
-	  Quiz newQuiz(@RequestBody Quiz newQuiz) {
-	    return q2repository.save(newQuiz);
+	  QuizTwo newQuiz(@RequestBody QuizTwo newQuizTwo) {
+	    return q2repository.save(newQuizTwo);
 	   
 	  }
 
 
 	  @PutMapping("/quizes2/{id}")
-	  Quiz replaceQuizTwo(@RequestBody Quiz newQuiz, @PathVariable Long id) {
+	  QuizTwo replaceQuizTwo(@RequestBody QuizTwo newQuizTwo, @PathVariable Long id) {
 	    
 
-	        newQuiz.setId(id);
-	        return q2repository.save(newQuiz);
+	        newQuizTwo.setId(id);
+	        return q2repository.save(newQuizTwo);
 	     
 	  }
 
