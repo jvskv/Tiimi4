@@ -30,7 +30,7 @@ public class Ohjelmistoprojekti1Application {
 				Quiz quiz2 = new Quiz("2", "Metallica", "Master of puppets", "Hunger Games", "Kalakeitto", "Lätkä");
 					q1repo.save(quiz2);
 				
-				QuizTwo quiz3 = new QuizTwo("Python", "VSCode");
+				QuizTwo quiz3 = new QuizTwo("VSCode", "Python");
 					q2repo.save(quiz3);
 
 				User user1 = new User(0, "admin", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C", "ADMIN");

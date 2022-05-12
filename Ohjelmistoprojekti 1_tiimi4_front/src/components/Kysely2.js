@@ -1,170 +1,136 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import CreateIcon from "@mui/icons-material/Create";
-import { Button } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Paper,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
 
-function Kysely2 () {
+function Kysely2() {
+  const [open, setOpen] = React.useState(false);
+  const [viesti, setViesti] = useState("");
+  const [kysely, setValues] = React.useState({
+    ohjelmointikieli: "",
+    koodieditori: "",
+  });
+  const muuta = (e) => {
+    setValues({
+      ...kysely,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-    const [checked, setChecked] = useState(false)
-    const [textfield, setTextfield] = useState(false);
-    const [textfield1, setTextfield1] = useState(false);
-    const [value, setValue] = React.useState({
-        ohjelmointikieli: '',
-        koodieditori: ''
+  const handleClose = () => {
+    console.log("Lähetys");
+    vastaus(kysely);
+    setOpen(false);
+    setViesti("Vastaukset tallennettu. Kiitos!");
+  };
+
+  const vastaus = (kysely) => {
+    fetch("http://localhost:8080/quizes2", {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(kysely),
     })
+      .then(response => {
+        if (response.ok) {
+          alert("Tallennettu!");
+        } else {
+          alert("Virhe");
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
-    const handleChange = (event) => {
-            setValue({...value, [event.target.name]: event.target.value})  
-    };
+  return (
+    <Paper sx={{ padding: "10px", margin: "10px" }}>
+      <FormControl>
+        <FormLabel id="ohjelmointikieli">
+          1. Mikä seuraavista on paras ohjelmointikieli?
+        </FormLabel>
+        <RadioGroup
+          aria-labelledby="ohjelmointikieli"
+          name="radio-buttons-group"
+        >
+          <FormControlLabel
+            value="java"
+            control={<Radio />}
+            label="Java"
+            onChange={(e) => muuta(e)}
+          />
+          <FormControlLabel
+            value="python"
+            control={<Radio />}
+            label="Python"
+            onChange={(e) => muuta(e)}
+          />
+          <FormControlLabel
+            value="javascript"
+            control={<Radio />}
+            label="JavaScript"
+            onChange={(e) => muuta(e)}
+          />
+          <FormControlLabel
+            value="c#"
+            control={<Radio />}
+            label="C#"
+            onChange={(e) => muuta(e)}
+          />
+          <FormControlLabel
+            value="muu"
+            control={<Radio />}
+            label="Muu"
+            onChange={(e) => muuta(e)}
+          />
+        </RadioGroup>
 
-    const handleSubmit = (event) => {
-        setValue({
-            ohjelmointikieli: '',
-            koodieditori: ''
-        })
-        console.log(value)
-        addAnswer(value)
-    };
-
-    const addAnswer = (value) => {
-        fetch("https://localhost:8080/vastaus2",{
-          method:'POST',
-          headers: {'Content-type':'application/json'},
-          body: JSON.stringify(value)
-        })
-        .then(response => {
-          if (response.ok) {
-            alert('Saved!')
-          }
-          else {
-            alert('Something went wrong')
-          }
-        })
-        .catch(err => console.log(err))
-      }
-
-    return (
-        <div className="checks">
-            <form>
-                <p>1. Mikä seuraavista on paras ohjelmointikieli:</p>
-                <input
-                    type="checkbox"
-                    id="ohjelmointikieli"
-                    name="ohjelmointikieli"
-                    value="Java"
-                    onChange={handleChange}
-                    checked={checked}
-                    onChange={(e) => setChecked(e.target.checked)}
-                />
-                <label htmlFor="ohjelmointikieli">Java</label>
-                <br />
-                <input
-                    type="checkbox"
-                    id="ohjelmointikieli"
-                    name="ohjelmointikieli"
-                    value="Python"
-                    onChange={handleChange}
-                />
-                <label htmlFor="ohjelmointikieli">Python</label>
-                <br />
-                <input
-                    type="checkbox"
-                    id="ohjelmointikieli"
-                    name="ohjelmointikieli"
-                    value="JavaScript"
-                    onChange={handleChange}
-                />
-                <label htmlFor="ohjelmointikieli">JavaScipt</label>
-                <br />
-                <input
-                    type="checkbox"
-                    id="ohjelmointikieli"
-                    name="ohjelmointikieli"
-                    value="C#"
-                    onChange={handleChange}
-                />
-                <label htmlFor="ohjelmointikieli">C#</label>
-                <br />
-                <input
-                    type="checkbox"
-                    id="ohjelmointikieli"
-                    name="ohjelmointikieli"
-                    value="Else"
-                    onChange={() => {
-                    setTextfield(!textfield)
-                      }
-                    }
-                    textfield={textfield}
-                />
-                <label>
-                    Jokin muu, mikä:
-                    <input
-                    name="ohjelmointikieli"
-                    type="text"
-                    disabled={!textfield}
-                    onChange={handleChange}
-                    />
-                </label>
-                <br />
-                <br />
-                <p>2. Mikä seuraavista on paras koodieditori:</p>
-                <input
-                    type="checkbox"
-                    id="koodieditori"
-                    name="koodieditori"
-                    value="Eclipse"
-                    onChange={handleChange}
-                />
-                <label htmlFor="koodieditori">Eclipse</label>
-                <br />
-                <input
-                    type="checkbox"
-                    id="koodieditori"
-                    name="koodieditori"
-                    value="Visual Studio Code"
-                    onChange={handleChange}
-                />
-                <label htmlFor="koodieditori">Visual Studio Code</label>
-                <br />
-                <input
-                    type="checkbox"
-                    id="koodieditori"
-                    name="koodieditori"
-                    value="Notepad++"
-                    onChange={handleChange}
-                />
-                <label htmlFor="koodieditori">Notepad++</label>
-                <br />
-                <input
-                    type="checkbox"
-                    id="koodieditori"
-                    name="koodieditori"
-                    value="Else"
-                    onChange={() => {
-                    setTextfield1(!textfield1)
-                      }
-                    }
-                    textfield1={textfield1}
-                />
-                <label>
-                    Jokin muu, mikä:
-                    <input
-                    name="koodieditori"
-                    type="text"
-                    disabled={!textfield1}
-                    onChange={handleChange}
-                    />
-                </label>
-                <br />
-                <Button 
-                    variant="contained" 
-                    onClick={handleSubmit}
-                    startIcon={<CreateIcon />}
-                    >
-                    Lisää
-                </Button>
-            </form>
-        </div>
-    )
+        <FormLabel id="koodieditori">
+          2. Mikä seuraavista on paras koodieditori?
+        </FormLabel>
+        <RadioGroup aria-labelledby="koodieditori" name="radio-buttons-group">
+          <FormControlLabel
+            value="eclipse"
+            control={<Radio />}
+            label="Eclipse"
+            onChange={(e) => muuta(e)}
+          />
+          <FormControlLabel
+            value="visual studio code"
+            control={<Radio />}
+            label="Visual Studio Code"
+            onChange={(e) => muuta(e)}
+          />
+          <FormControlLabel
+            value="notepad++"
+            control={<Radio />}
+            label="Notepad++"
+            onChange={(e) => muuta(e)}
+          />
+          <FormControlLabel
+            value="muu"
+            control={<Radio />}
+            label="Muu"
+            onChange={(e) => muuta(e)}
+          />
+        </RadioGroup>
+      </FormControl>
+      <Box sx={{ textAlign: "center" }}>
+        <Button
+          onClick={(e) => handleClose(e)}
+          variant="contained"
+          startIcon={<CreateIcon />}
+        >
+          Lisää
+        </Button>
+      </Box>
+    </Paper>
+  );
 }
 
-export default Kysely2
+export default Kysely2;
