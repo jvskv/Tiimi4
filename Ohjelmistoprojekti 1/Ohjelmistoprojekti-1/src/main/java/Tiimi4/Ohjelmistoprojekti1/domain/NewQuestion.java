@@ -24,10 +24,11 @@ public class NewQuestion {
 		super();
 	}
 
-	public NewQuestion(String kysymys, boolean teksti) {
+	public NewQuestion(String kysymys, boolean teksti, NewQuiz newquiz) {
 		super();
 		this.kysymys = kysymys;
 		this.teksti = teksti;
+		this.newquiz = newquiz;
 	}
 
 	public Long getId() {
@@ -53,4 +54,19 @@ public class NewQuestion {
 	public void setTeksti(boolean teksti) {
 		this.teksti = teksti;
 	}
+
+	public NewQuiz getNewquiz() {
+		return newquiz;
+	}
+
+	public void setNewquiz(NewQuiz newquiz) {
+		this.newquiz = newquiz;
+	}
+
+	@Override
+	public String toString() {
+		return "NewQuestion [id=" + id + ", kysymys=" + kysymys + ", teksti=" + teksti + ", newquiz=" + newquiz + "]";
+	}
+	
+	
 }

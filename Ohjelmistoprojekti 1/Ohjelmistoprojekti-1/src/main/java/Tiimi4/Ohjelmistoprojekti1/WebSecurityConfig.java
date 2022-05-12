@@ -27,8 +27,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/css/**").permitAll().and().authorizeRequests().anyRequest()
+		http.authorizeRequests().antMatchers("/css/**").permitAll().antMatchers("/h2-console/**").permitAll().and()
+		.authorizeRequests().anyRequest()
 				.authenticated().and().formLogin().defaultSuccessUrl("/kysely", true).permitAll().and().logout()
 				.permitAll();
+		
+		http.csrf().disable();
+        http.headers().frameOptions().disable();
 	}
 }

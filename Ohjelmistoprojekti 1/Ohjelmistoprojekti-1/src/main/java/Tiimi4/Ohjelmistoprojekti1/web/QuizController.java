@@ -1,9 +1,13 @@
 package Tiimi4.Ohjelmistoprojekti1.web;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -15,7 +19,6 @@ import Tiimi4.Ohjelmistoprojekti1.domain.Quiz;
 import Tiimi4.Ohjelmistoprojekti1.domain.QuizRepository;
 import Tiimi4.Ohjelmistoprojekti1.domain.QuizTwo;
 import Tiimi4.Ohjelmistoprojekti1.domain.QuizTwoRepository;
-
 
 @Controller
 public class QuizController {
@@ -41,19 +44,21 @@ public class QuizController {
 	
 	@RequestMapping(value = "/newquiz")
 	public String newQuiz(Model model) {
-		// model.addAttribute("newquizes", newqrepo.findAll());
 		model.addAttribute("newquiz", new NewQuiz());
-		model.addAttribute("newquestions", newquestionrepo.findAll());
 		return "newquiz";
 	}
 	
-	@RequestMapping(value = "/quizsave", method = RequestMethod.POST)
-	public String save(NewQuiz newquiz) {
+	@PostMapping("/quizsave")
+	public String save(NewQuiz newquiz, Model model) {
 		newqrepo.save(newquiz);
-		return "redirect:newquiz";
+		NewQuestion newquestion = new NewQuestion();
+		newquestion.setNewquiz(newquiz);
+		model.addAttribute("newquizId", newquiz.getId());
+		model.addAttribute("newquestion", newquestion);
+		return "redirect:newquestion";
 	}
 	
-	@RequestMapping(value = { "/newquiztulos" })
+	@GetMapping("/newquiztulos")
 	public String newQuizList(Model model) {
 		model.addAttribute("newquizes", newqrepo.findAll());
 		return "newquiztulos";
@@ -65,10 +70,21 @@ public class QuizController {
 		return "newquestion";
 	}
 	
-	@RequestMapping(value = "/questionsave", method = RequestMethod.POST)
+	@PostMapping("/questionsave")
 	public String save(NewQuestion newquestion) {
+		System.out.println("questionsave" + newquestion);
 		newquestionrepo.save(newquestion);
-		return "redirect:newquiz";
+		return "redirect:quizsave";
+	}
+	
+	//@{/moreInfo/{id}(id=${query.id})}
+	//@PreAuthorize("hasAuthority('ADMIN')")	
+	@GetMapping("moreInfo/{id}")
+	public String checkQuery(@PathVariable("id") Long id, Model model) {
+		Optional<NewQuiz> tmpQuery = newqrepo.findById(id);
+		NewQuiz newquiz = tmpQuery.get();
+ 		model.addAttribute("newquiz", newquiz);
+		return "newquizContent";
 	}
 	
 	@RequestMapping(value = "/quiz1")

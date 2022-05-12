@@ -10,12 +10,15 @@
 	<div>
 		<table class="table table-striped">
 	        <tr>
+	        	<th>Id</th>
 	        	<th>Title</th>
 	            <th>Description</th>
 	        </tr>  
 	        <tr th:each = "newquiz : ${newquizes}">
+	        	<td th:text="${newquiz.id}"></td>
 	        	<td th:text="${newquiz.title}"></td>
 	            <td th:text="${newquiz.desc}"></td>
+	            <td ><a th:href="@{/moreInfo/{id}(id=${newquiz.id})}">Lisätietoa</a></td>
 	        </tr>
 	     </table>
 	</div>

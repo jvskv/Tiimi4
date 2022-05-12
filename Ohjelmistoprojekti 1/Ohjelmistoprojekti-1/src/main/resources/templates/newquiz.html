@@ -18,25 +18,7 @@
             <input type="text" id="desc" th:field="*{desc}" />
             <div style="clear: both; display: block; height: 10px;"></div>
             
-	<div>
-		<a href="/newquestion" class="btn btn-primary">Lisää Kysymys</a>
-	</div>
-	<div>
-		<table class="table table-striped">
-	        <tr>
-	        	<th>Kysymys</th>
-	            <th>Teksti?</th>
-	        </tr>  
-	        <tr th:each = "newquestion : ${newquestions}">
-	        	<td th:text="${newquestion.kysymys}"></td>
-	            <td th:text="${newquestion.teksti}"></td>
-	        </tr>
-	     </table>
-	</div>
-	<div>
-		<a href="/newquiztulos" class="btn btn-primary">Tallenna Kysely</a>
-	</div>
-	<input type="submit" value="Save"></input>
+	<input type="submit" value="Lisää kysymykset"></input>
 	</form>
 	</div>
 </body>

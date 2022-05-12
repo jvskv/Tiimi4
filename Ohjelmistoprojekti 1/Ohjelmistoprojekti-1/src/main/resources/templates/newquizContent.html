@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<title>Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+	<h3>Tarkemmat tiedot valitsemastasi kyselystä</h3>
+
+	
+	<form th:object="${newquiz}" th:action="@{/saveUpdatedQuery}" action="#" method="post">
+	
+	<label><b>ID: </b></label>
+	<label th:text="${newquiz.id}"></label><br>	
+	<label><b>NIMI: </b></label>
+	<label th:text="${newquiz.title}"></label><br>
+	
+	<label><b>SISÄLTÖ: </b></label>
+	<label th:text="${newquiz.desc}"></label><br>
+		
+	<label><b>KYSYMYKSET: </b></label>
+	
+	<table>
+		<tr>
+			<th>Id</th>
+			<th>questionContent</th>
+			<th>questionType</th>
+		</tr>
+		<tr th:each="newquestion : ${newquiz.newquestions}">
+			<td th:text="${newquestion.id}"></td>
+			<td th:text="${newquestion.kysymys}"></td>
+			<td th:text="${newquestion.teksti}"></td>
+		</tr>
+	</table>
+	</form>
+	<a href="/kysely">Paluu pääsivulle</a>
+</body>
+</html>

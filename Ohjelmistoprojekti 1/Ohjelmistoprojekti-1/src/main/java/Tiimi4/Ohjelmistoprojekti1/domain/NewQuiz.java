@@ -4,10 +4,13 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class NewQuiz {
@@ -18,18 +21,19 @@ public class NewQuiz {
 	private String title;
 	private String desc;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "newquiz")
-	private List<NewQuestion> kysymykset;
+	@OneToMany(cascade = CascadeType.ALL, fetch= FetchType.EAGER, mappedBy = "newquiz")
+	@JsonIgnore
+	private List<NewQuestion> newquestions;
 	
 	public NewQuiz() {
 		super();
 	}
 
-	public NewQuiz(String title, String desc, List<NewQuestion> kysymykset) {
+	public NewQuiz(String title, String desc, List<NewQuestion> newquestions) {
 		super();
 		this.title = title;
 		this.desc = desc;
-		this.kysymykset = kysymykset;
+		this.newquestions = newquestions;
 	}
 
 	public Long getId() {
@@ -56,11 +60,11 @@ public class NewQuiz {
 		this.desc = desc;
 	}
 
-	public List<NewQuestion> getKysymykset() {
-		return kysymykset;
+	public List<NewQuestion> getNewquestions() {
+		return newquestions;
 	}
 
-	public void setKysymykset(List<NewQuestion> kysymykset) {
-		this.kysymykset = kysymykset;
+	public void setNewquestions(List<NewQuestion> newquestions) {
+		this.newquestions = newquestions;
 	}
 }
