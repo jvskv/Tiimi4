@@ -9,6 +9,8 @@
 	<h1>Uusi kysely</h1>
 	<div>
 	<form th:object="${newquiz}" th:action="@{quizsave}" action="#" method="post">
+	   <label for="id"><i>Kyselylle generoidaan id automaattisesti</i></label><br> 
+            <div th:field="*{id}" />
         
         	<label for="title">Title</label>
             <input type="text" id="title" th:field="*{title}" />
@@ -18,7 +20,7 @@
             <input type="text" id="desc" th:field="*{desc}" />
             <div style="clear: both; display: block; height: 10px;"></div>
             
-	<input type="submit" value="Lisää kysymykset"></input>
+	   <input type="submit" value="Tallenna kysely"></input>
 	</form>
 	</div>
 </body>

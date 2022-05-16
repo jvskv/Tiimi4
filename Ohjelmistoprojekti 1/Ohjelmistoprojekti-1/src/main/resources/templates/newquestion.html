@@ -9,6 +9,7 @@
 	<h1>Kysymyksen luonti</h1>
 	<div>
 		<form th:object="${newquestion}" th:action="@{questionsave}" action="#" method="post">
+		    <input type="hidden" id="newquiz" th:field="*{newquiz}" /> 
 	
 			<label for="kysymys">Kysymys: </label>
 			<input type="text" name="kysymys" id="kysymys"/>

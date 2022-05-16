@@ -8,33 +8,36 @@
 
 <body>
 	<h3>Tarkemmat tiedot valitsemastasi kyselystä</h3>
-
 	
-	<form th:object="${newquiz}" th:action="@{/saveUpdatedQuery}" action="#" method="post">
+	<form th:object="${newquiz}" th:action="@{/newquestion}" action="#" method="get">
 	
-	<label><b>ID: </b></label>
-	<label th:text="${newquiz.id}"></label><br>	
-	<label><b>NIMI: </b></label>
-	<label th:text="${newquiz.title}"></label><br>
+	<input type="hidden" id="id" th:field="*{id}" />
+    <input type="hidden" id="title" th:field="*{title}" />
+    <input type="hidden" id="desc" th:field="*{desc}" />
 	
-	<label><b>SISÄLTÖ: </b></label>
+	<label><b>Kyselyn nimi: </b></label>
+	<label th:text="*{title}"></label><br>
+	
+	<label><b>Kyselyn tarkoitus: </b></label>
 	<label th:text="${newquiz.desc}"></label><br>
 		
-	<label><b>KYSYMYKSET: </b></label>
+	<label><b>Kysymykset: </b></label>
 	
 	<table>
-		<tr>
-			<th>Id</th>
-			<th>questionContent</th>
-			<th>questionType</th>
-		</tr>
-		<tr th:each="newquestion : ${newquiz.newquestions}">
-			<td th:text="${newquestion.id}"></td>
+	    <tr>
+            <th>Num</th>
+            <th>Kysymys</th>
+            <th>Tekstikenttä</th>
+        </tr>  
+		<tr th:each="newquestion, stat : ${newquiz.newquestions}">
+		    <td th:text="${stat.count}">1</td>  
 			<td th:text="${newquestion.kysymys}"></td>
 			<td th:text="${newquestion.teksti}"></td>
 		</tr>
 	</table>
-	</form>
+	<input type="submit" value="Lisää uusi kysymys"></input>
+	<br><br><br>
 	<a href="/kysely">Paluu pääsivulle</a>
+	</form>
 </body>
 </html>
