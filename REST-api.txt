@@ -1,0 +1,173 @@
+**Show Quizes**
+----
+  Returns json data of all the quizes in QuizOne.
+
+* **URL**
+
+  /quizes
+
+* **Method:**
+
+  `GET`
+  
+*  **URL Params**
+
+  None
+
+* **Data Params**
+
+  None
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `{ q1repository.findAll }`
+ 
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+    **Content:** `{ error : "Virhe" }`
+
+
+* **Sample Call:**
+
+  ```javascript
+    $.ajax({
+      url: "/quizes",
+      dataType: "json",
+      type : "GET",
+      success : function(r) {
+        console.log(r);
+      }
+    });
+  ```
+
+
+
+**Save QuizOnes**
+----
+  Saves json data of all the quizes in QuizOne.
+
+* **URL**
+
+  /quizes
+
+* **Method:**
+
+  `POST`
+  
+*  **URL Params**
+
+  None
+
+* **Data Params**
+
+  None
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `{ alert : "Tallennettu" }`
+ 
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+    **Content:** `{ alert : "Virhe" }`
+
+
+* **Sample Call:**
+
+  ```javascript
+    fetch("https://localhost:8080/quizes", {
+      method: "POST",
+      headers: { "Content-type": "application.json" },
+      body: JSON.stringify(kysely),
+    })
+  ```
+
+
+**Edit QuizOnes**
+----
+  Edits json data of on of the quizes in QuizOne.
+
+* **URL**
+
+  /quizes/{id}
+
+* **Method:**
+
+  `PUT`
+  
+*  **URL Params**
+
+  {id}="long"
+
+* **Data Params**
+
+  None
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `{ alert : "Tallennettu" }`
+ 
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+    **Content:** `{ alert : "Virhe" }`
+
+
+* **Sample Call:**
+
+  ```javascript
+    fetch("https://localhost:8080/quizes/{id}", {
+      method: "PUT",
+      headers: { "Content-type": "application.json" },
+      body: JSON.stringify(kysely),
+    })
+
+
+**Delete QuizOnes**
+----
+  Deletes json data of one of the quizes in QuizOne.
+
+* **URL**
+
+  /quizes/{id}
+
+* **Method:**
+
+  `DELETE`
+  
+*  **URL Params**
+
+  {id}="long"
+
+* **Data Params**
+
+  None
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `{ q1repository.deleteById }`
+ 
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+    **Content:** `{ alert : "Virhe" }`
+
+
+* **Sample Call:**
+
+  ```javascript
+ const deleteQuiz = (link) => {
+        if (window.confirm('Are you sure?'))
+
+        fetch(link, { method: 'DELETE'})
+            .then(response => {
+                if(response.ok) {
+                    fetchQuizes();
+                }
+            })
+    }
