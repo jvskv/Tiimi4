@@ -19,7 +19,7 @@ function Kysely2 () {
     };
 
     const addAnswer = (value) => {
-        fetch("http://localhost:8080/quizes2",{
+        fetch("https://localhost:8080/quizes2",{
           method:'POST',
           headers: {'Content-type':'application/json'},
           body: JSON.stringify(value)
